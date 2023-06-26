@@ -126,14 +126,12 @@ function read(req, res, next) {
 function update(req, res) {
   const { data: { deliverTo, mobileNumber, status, dishes } = {} } = req.body
   
-  res.locals.order = {
-    id: res.locals.order.id,
-    deliverTo: deliverTo,
-    mobileNumber: mobileNumber,
-    dishes: dishes,
-    status: status,
-  }
-  res.json({ data: res.locals.order });
+  const order = res.locals.order
+  order.deliverTo = deliverTo;
+  order.mobileNumber = mobileNumber;
+  order.dishes = dishes;
+  order.status = status;
+  res.json({ data: order })
 }
 
 function destroy(req, res, next) {
